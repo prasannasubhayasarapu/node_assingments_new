@@ -1,0 +1,48 @@
+
+CREATE TABLE student (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    age INTEGER CHECK (age > 0),
+    course TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+insert into student(name,email,age,course) values
+('Rahul Sharma', 'rahul.sharma@example.com', 22, 'Computer Science'),
+('Priya Patel', 'priya.patel@example.com', 19, 'Electrical Engineering'),
+('Amit Kumar', 'amit.kumar@example.com', 23, 'Mechanical Engineering'),
+('Sneha Reddy', 'sneha.reddy@example.com', 20, 'Computer Science'),
+('Vikram Singh', 'vikram.singh@example.com', 25, 'Data Science'),
+('Anjali Mehta', 'anjali.mehta@example.com', 18, 'Biotechnology'),
+('Karthik Nair', 'karthik.nair@example.com', 21, 'Artificial Intelligence');
+
+select * from student
+select * from student where age>20
+select name , email from student
+select * from student where course='Computer Science'
+
+update student
+set age=20 
+where id=4
+
+update student  set course='Electronics & Communication' where course='Electrical Engineering'
+delete from student where id=7
+delete from student where age<19
+select * from student
+
+select count(*) as count_student from student 
+select avg(age) as avg_age from student
+select min(age) as min_age ,max(age) as max_age from student
+
+SELECT course, COUNT(*) AS student_count
+FROM student
+GROUP BY course
+order by student_count desc
+
+select course ,count(*) as student_count from student group by course
+select course ,count(*) as greaterthan_one from student group by course having count(*)>1
+select course ,count(*) as highest_student from student group by course order by highest_student desc
+
+select * from student order by created_at limit 3
+select * from student order by age desc limit 5
+select * from student  where course='Computer Science' order by age desc
